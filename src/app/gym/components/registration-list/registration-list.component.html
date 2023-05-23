@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-between">
+  <button class="btn shadow mt-3 m-1" routerLink="/">
+    <i class="bi bi-arrow-left"></i> Back To Registration
+  </button>
+  <form class="d-flex">
+    <input
+      class="form-control me-2 mt-3 m-1"
+      type="text"
+      name="search"
+      placeholder="Search"
+      [(ngModel)]="searchText"
+    />
+  </form>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover mt-5">
+    <thead>
+      <tr class="text-white text-center">
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Height</th>
+        <th scope="col">BMI</th>
+        <th scope="col">BMI Result</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let user of userList | filter : searchText">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.mobile }}</td>
+        <td>{{ user.weight }}</td>
+        <td>{{ user.height }}</td>
+        <td>{{ user.bmi }}</td>
+        <td>{{ user.bmiResult }}</td>
+        <td>
+          <a
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="showDetails(user._id)"
+          >
+            <i class="bi bi-eye fs-5"></i>
+          </a>
+
+          <a type="button" (click)="edit(user._id)"
+            ><i class="bi bi-pencil mx-3 fs-5"></i
+          ></a>
+          <a type="button" (click)="deleteUser(user._id)"
+            ><i class="bi bi-trash3 text-danger fs-5"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">USer Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-start">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGWm7kgMH1PEsycRwkyqPcPB1b2NITpD8j2g&usqp=CAU"
+                class="rounded-circle"
+                width="70"
+                height="50"
+              />
+
+              <h5 class="card-title mt-3">
+                {{ user.firstName }} {{ user.lastName }}
+              </h5>
+            </div>
+
+            <h6 class="card-subtitle mb-5 text-muted ms-5 ps-4">
+              {{ user.email }}
+            </h6>
+            <p class="card-text"><span>Mobile:</span> 0{{ user.mobile }}</p>
+            <p class="card-text">
+              <span>Enquirey Date :</span> {{ user.enquireyDate | date }}
+            </p>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><span>Gender:</span> {{ user.gender }}</p>
+              <p class="card-text"><span>package :</span> {{ user.package }}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><span> Weight:</span> {{ user.weight }}</p>
+              <p class="card-text"><span> Height:</span> {{ user.height }}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><span> bmi:</span> {{ user.bmi }}</p>
+              <p class="card-text">
+                <span>bmi result:</span> {{ user.bmiResult }}
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="card-text">
+                <span>Have Gym Befor:</span> {{ user.haveGymBefor }}
+              </p>
+              <p class="card-text">
+                <span>Require Trainer: </span> {{ user.requireTrainer }}
+              </p>
+            </div>
+
+            <span>Goals:</span>
+            <p class="card-text basic-chip outline">
+              {{ user.important }}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<lib-ng-toast></lib-ng-toast>

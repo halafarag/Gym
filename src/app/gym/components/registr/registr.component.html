@@ -1,0 +1,219 @@
+<div class="container mb-5">
+  <header class="text-center">
+    <img
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJcMT7z8vv5iTU3a0rKlNcFlUmB5NT3yPXQQ&usqp=CAU"
+      width="300"
+      height="150"
+    />
+  </header>
+  <div class="form-wrap">
+    <form id="survey-form" [formGroup]="registerForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Mobile</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="mobile"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Weight</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="weight"
+            />
+            <div id="emailHelp" class="form-text">Unit In KGs</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Height</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="height"
+              [readonly]="!this.registerForm.value?.weight"
+            />
+            <div id="emailHelp" class="form-text">Unit In Meter</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>BMI</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="bmi"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>BMI Result</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="bmiResult"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Have Been Gyem Befor?</label>
+            Yes
+            <input
+              class="form-check-input me-5"
+              type="radio"
+              value="Yes"
+              formControlName="haveGymBefor"
+            />
+            No
+            <input
+              class="form-check-input"
+              type="radio"
+              value="No"
+              formControlName="haveGymBefor"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label> Packege</label>
+            <select name="role" class="form-control" formControlName="package">
+              <option value="{{ package }}" *ngFor="let package of packeges">
+                {{ package }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Do You Require Trainer?</label>
+            Yes
+            <input
+              class="form-check-input me-5"
+              type="radio"
+              value="Yes"
+              formControlName="requireTrainer"
+            />
+            No
+            <input
+              class="form-check-input"
+              type="radio"
+              value="No"
+              formControlName="requireTrainer"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Gender</label>
+            Male
+            <input
+              class="form-check-input me-5"
+              type="radio"
+              value="Male"
+              formControlName="gender"
+            />
+            Female
+            <input
+              class="form-check-input"
+              type="radio"
+              value="Female"
+              formControlName="gender"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Enquriy date</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="enquireyDate"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label> Which Of The Flowing Is Important To You?</label>
+            <select class="form-control" formControlName="important" multiple>
+              <option disabled selected value>You can Select multiple</option>
+              <option value="{{ imp }}" *ngFor="let imp of importantList">
+                {{ imp }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2 m-auto">
+          <button
+            *ngIf="!registerOrUpdate"
+            type="submit"
+            class="btn shadow view"
+            (click)="register()"
+          >
+            Register
+          </button>
+          <button
+            *ngIf="registerOrUpdate"
+            type="submit"
+            class="btn shadow view"
+            (click)="update()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<lib-ng-toast></lib-ng-toast>
