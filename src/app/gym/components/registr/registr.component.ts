@@ -63,7 +63,6 @@ export class RegistrComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
     const user = this.registerForm.value;
     this.apiService.register(user).subscribe((res) => {
       this.toast.success({
